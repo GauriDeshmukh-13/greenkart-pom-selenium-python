@@ -7,7 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 # ---------------- FIXTURE : DRIVER SETUP ----------------
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="function")
 def setup(request):
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))

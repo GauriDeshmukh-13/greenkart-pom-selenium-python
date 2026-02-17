@@ -4,12 +4,14 @@ from pages.checkout_page import CheckoutPage
 from utils.data_reader import load_test_data
 
 
+test_data = load_test_data()
+
+
 @pytest.mark.usefixtures("setup")
 class TestGreenKart:
 
-    def test_e2e_order(self):
-
-        data = load_test_data()
+    @pytest.mark.parametrize("data", test_data)
+    def test_e2e_order(self, data):
 
         self.driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
 

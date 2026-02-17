@@ -1,4 +1,14 @@
-{
-  "search_text": "ber",
-  "product_name": "Cucumber"
-}
+[
+  {
+    "search_text": "ber",
+    "product_name": "Cucumber"
+  },
+  {
+    "search_text": "tom",
+    "product_name": "Tomato"
+  },
+  {
+    "search_text": "pot",
+    "product_name": "Potato"
+  }
+]
