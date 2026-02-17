@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7b028e3-94bf-49bc-9392-4f381855e403" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/config/config/.gitkeep" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testdata/products.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/data_reader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_launch.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_launch.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
