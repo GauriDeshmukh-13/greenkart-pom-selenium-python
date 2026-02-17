@@ -2,15 +2,39 @@ import pytest
 import os
 from datetime import datetime
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 
-# ---------------- FIXTURE : DRIVER SETUP ----------------
+# -------- Add command line option --------
+def pytest_addoption(parser):
+    parser.addoption(
+        "--browser",
+        action="store",
+        default="chrome",
+        help="browser selection: chrome or edge"
+    )
+
+
+# -------- Fixture --------
 @pytest.fixture(scope="function")
 def setup(request):
 
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    browser_name = request.config.getoption("browser")
+
+    if browser_name == "chrome":
+        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+
+
+    elif browser_name == "edge":
+        driver = webdriver.Edge(service=EdgeService("drivers/msedgedriver.exe"))
+
+
+    else:
+        raise Exception("Browser not supported")
+
     driver.maximize_window()
     driver.implicitly_wait(5)
 
@@ -21,7 +45,7 @@ def setup(request):
     driver.quit()
 
 
-# ---------------- SCREENSHOT ON FAILURE ----------------
+# -------- Screenshot on failure --------
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
 
@@ -30,7 +54,6 @@ def pytest_runtest_makereport(item, call):
 
     if report.when == "call" and report.failed:
 
-        # get driver from test class
         driver = item.cls.driver
 
         reports_dir = "reports/screenshots"

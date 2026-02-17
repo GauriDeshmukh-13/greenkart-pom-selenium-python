@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class HomePage:
@@ -15,8 +17,16 @@ class HomePage:
 
     # ---------------- ACTIONS ----------------
 
+    def wait_for_products(self):
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(lambda d: len(d.find_elements(*self.product_names)) > 0)
+
     def search_product(self, text):
-        self.driver.find_element(*self.search_box).send_keys(text)
+        wait = WebDriverWait(self.driver, 10)
+        search = wait.until(EC.visibility_of_element_located(self.search_box))
+        search.clear()
+        search.send_keys(text)
+        self.wait_for_products()
 
     def get_product_list(self):
         return self.driver.find_elements(*self.product_names)
